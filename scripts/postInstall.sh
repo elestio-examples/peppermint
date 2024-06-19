@@ -18,12 +18,6 @@ login=$(curl http://${target}/api/v1/auth/login \
   -H 'content-type: application/json' \
   -H 'pragma: no-cache' \
   -H 'priority: u=1, i' \
-  -H 'sec-ch-ua: "Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"' \
-  -H 'sec-ch-ua-mobile: ?0' \
-  -H 'sec-ch-ua-platform: "Windows"' \
-  -H 'sec-fetch-dest: empty' \
-  -H 'sec-fetch-mode: cors' \
-  -H 'sec-fetch-site: same-origin' \
   -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36' \
   --data-raw '{"email":"'${ADMIN_EMAIL}'","password":"1234"}')
 
