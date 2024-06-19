@@ -6,9 +6,9 @@ sleep 60s;
 
 target=$(docker-compose port peppermint 3000)
 
-docker-compose exec -T db bash -c "psql -U postgres postgres <<EOF
+docker-compose exec -T postgres bash -c "psql -U postgres postgres <<EOF
     \c ${DB_DATABASE}
-    UPDATE public.User SET \"email\"='${ADMIN_EMAIL}' WHERE \"email\"="admin@admin.com"
+    UPDATE \"User\" SET \"email\"='${ADMIN_EMAIL}' WHERE \"email\"='admin@admin.com'
 EOF";
 
 login=$(curl http://${target}/api/v1/auth/login \
@@ -25,7 +25,7 @@ login=$(curl http://${target}/api/v1/auth/login \
   -H 'sec-fetch-mode: cors' \
   -H 'sec-fetch-site: same-origin' \
   -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36' \
-  --data-raw '{"email":'${ADMIN_EMAIL}',"password":"1234"}')
+  --data-raw '{"email":"'${ADMIN_EMAIL}'","password":"1234"}')
 
   access_token=$(echo $login | jq -r '.token' )
 
